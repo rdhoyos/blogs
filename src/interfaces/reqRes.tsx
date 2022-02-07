@@ -5,6 +5,13 @@ export interface ReqPosts {
     limit: number;
 }
 
+export interface ReqUsers {
+    data:  Owner[];
+    total: number;
+    page:  number;
+    limit: number;
+}
+
 export interface Post {
     id:          string;
     image:       string;

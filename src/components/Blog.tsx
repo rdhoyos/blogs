@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router';
 import { reqResApi } from '../api/reqRes';
 import { ReqPosts, Post } from '../interfaces/reqRes';
 import { CardPost } from './CardPost';
 
-const Blog = () => {
+export const Blog = () => {
 
+    const navigate = useNavigate();
     const [posts, setPosts] = useState<Post[]>([]);
 
     const pageRef = useRef(0);
@@ -50,34 +52,48 @@ const Blog = () => {
         }
     }
 
+    const goLogin = () => {
+        const lastPath = '/login';
+        navigate( lastPath, {
+            replace: false
+        });
+    }
+
   return (
     <>
+    <div>
         <h1>
             My Blog
-           </h1> 
-        <hr/>
-          <div className="row row-cols-1 row-cols-md-3 g-4">
-              {posts.map( CardPost )}
-          </div>
+        </h1> 
+        <button
+            className="btn btn-success"
+            onClick={ goLogin }
+        >
+            Login
+        </button>
+    </div>
+        
+    <hr/>
+        <div className="row row-cols-1 row-cols-md-3 g-4">
+            {posts.map( CardPost )}
+        </div>
 
-          <button
-                className="btn btn-primary"
-                onClick={ previousPage }
-            >
-                Anteriores
-            </button>
+        <button
+            className="btn btn-primary"
+            onClick={ previousPage }
+        >
+            Anteriores
+        </button>
 
-            &nbsp;
+        &nbsp;
 
-            <button
-                className="btn btn-primary"
-                onClick={ nextPage }
-            >
-                Siguientes
-            </button>
+        <button
+            className="btn btn-primary"
+            onClick={ nextPage }
+        >
+            Siguientes
+        </button>
         
     </>
   )
 };
-
-export default Blog;
